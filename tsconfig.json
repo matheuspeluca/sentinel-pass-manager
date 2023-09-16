@@ -4,15 +4,6 @@
     "allowJs": true,
     "declaration": true,
     "esModuleInterop": true,
-    "outDir": "./dist",
-    "baseUrl": "./src",
-    "paths": {
-      "@config/*": ["config/*"],
-      "@controllers/*": ["app/controllers/*"],
-      "@models/*": ["app/models/*"],
-      "@services/*": ["app/services/*"],
-      "@middlewares/*": ["app/middlewares/*"],
-      "@errors/*": ["errors/*"]
-    }
+    "outDir": "./dist"
   }
 }

@@ -1,4 +1,4 @@
-import UserService from '@services/UserService'
+import UserService from '../services/UserService'
 import { Request, Response } from 'express'
 
 class UserController {

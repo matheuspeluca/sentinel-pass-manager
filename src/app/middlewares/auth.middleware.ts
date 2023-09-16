@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import authConfig from '../../config/auth'
 import { NextFunction, Response, Request } from 'express'
-import AppError from '@errors/AppError'
+import AppError from '../../errors/AppError'
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization

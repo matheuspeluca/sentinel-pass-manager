@@ -1,18 +1,23 @@
 import jwt from 'jsonwebtoken'
 import authConfig from '../../config/auth'
 import { NextFunction, Response, Request } from 'express'
-import AppError from '../../errors/AppError'
+
+interface IToken {
+    id: string
+}
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization
-    if (!authHeader) {
-        throw new AppError('Access token required', 401);
-    }
     try {
-        const token = authHeader.split(' ')[1];
-        const decode = jwt.verify(token, authConfig.secret)
-        req.body.userId = decode;
+        if (authHeader) {
+            const token = authHeader.split(' ')[1];
+            const decode = jwt.verify(token, authConfig.secret) as IToken
+            req.user = { id: decode.id }
+            next();
+        } else {
+            res.status(401).json({message : "accessToken is missing"});
+        }
     } catch (err) {
-        throw new AppError('Invalid JWT Token')
+        res.status(401).json({message : "Access Denied"});
     }
 }

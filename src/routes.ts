@@ -6,11 +6,10 @@ import authMiddleware from './app/middlewares/auth.middleware';
 
 const routes = Router()
 
-routes.post('/users', UserController.create);
 routes.post('/login', LoginController.login);
+routes.post('/users', authMiddleware("ADMIN"), UserController.create);
+routes.get('/users', authMiddleware("ADMIN"), UserController.listAll);
 
-routes.use(authMiddleware);
-
-routes.post('/secrets', SecretController.store);
+routes.post('/secrets', authMiddleware("USER"), SecretController.store);
 
 export default routes

@@ -11,10 +11,22 @@ class UserController {
 				name: req.body.name,
 				login: req.body.login,
 				email: req.body.email,
+				roles: req.body.roles,
 				password: bcrypt.hashSync(req.body.password, 8)
 			}, 'id');
 			res.json(user);
 		} catch (error) {
+			console.log(error)
+			res.status(500).json({message: error});
+		}
+	}
+
+	async listAll(req: Request, res: Response) {
+		try {
+			const users = await knex<User>('users').select();
+			res.json(users);
+		} catch (error) {
+			console.log(error)
 			res.status(500).json({message: error});
 		}
 	}

@@ -1,4 +1,4 @@
-import AppError from '@errors/AppError'
+import AppError from '../../errors/AppError'
 import { NextFunction, Response, Request } from 'express'
 
 export default (

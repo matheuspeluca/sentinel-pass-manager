@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes';
 
-import exceptionHandling from '@middlewares/exceptionHandling.middleware'
+import exceptionHandling from './app/middlewares/exceptionHandling.middleware'
 
 class App {
 

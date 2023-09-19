@@ -3,13 +3,12 @@ import {User} from '../models/User.model';
 import knex from '../../config/knex'
 import bcrypt from "bcrypt";
 
-import * as crypto from "crypto";
+import crypto from "crypto";
 import {SecretKey} from "../models/SecretKey.model";
 import encryptionUtil from "../util/Encryption.util";
 
 class SecretController {
     private _salt = 'posinupqw8j3paoueyvna';
-
     create(req: Request, res: Response) {
         const {password} = req.body
 
@@ -62,10 +61,6 @@ class SecretController {
                 }
             });
     }
-
-
-
-
 }
 
 export default new SecretController()

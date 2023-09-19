@@ -7,17 +7,16 @@ interface IToken {
     roles: string[]
 }
 
-export default (roles: string) => {
+export default (requiredRoles: string[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization
         try {
             if (authHeader) {
                 const token = authHeader.split(' ')[1];
                 const decode = jwt.verify(token, authConfig.secret) as IToken
-                req.user = { id: decode.id, roles: decode.roles }
+                req.authUser = { id: decode.id, roles: decode.roles }
 
-                let requiredRoles = roles.toLowerCase().split(";");
-                if(decode.roles.some(r => requiredRoles.includes(r))) {
+                if(requiredRoles.some(r => decode.roles.includes(r.toLowerCase()))) {
                     next();
                 } else {
                     res.status(403).json({message: "Access Denied"});

@@ -7,7 +7,7 @@ import authMiddleware from './app/middlewares/auth.middleware';
 const routes = Router()
 
 routes.post('/auth/login', LoginController.login);
-routes.post('/auth/register', LoginController.register);
+routes.post('/auth/register', authMiddleware(["ADMIN"]), LoginController.register);
 
 /**
  * Routes for users
